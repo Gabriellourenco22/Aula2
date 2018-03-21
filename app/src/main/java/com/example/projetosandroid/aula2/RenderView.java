@@ -21,11 +21,13 @@ public class RenderView extends View {
     Random PosYT= new Random();
 
 
-    int RandomX = Posx.nextInt(700) + 1;
-    int RandomY = PosY.nextInt(500) + 1;
+    int RandomX = Posx.nextInt(400-200) + 200;
+    int RandomY = PosY.nextInt(600-200) + 200;
 
-    int RandomXT = PosXT.nextInt(700) + 1;
-    int RandomYT = PosYT.nextInt(500) + 1;
+    int RandomXT = PosXT.nextInt(400-200) + 200;
+    int RandomYT = PosYT.nextInt(600-200) + 200;
+
+    int score;
 
 
 
@@ -43,7 +45,7 @@ public class RenderView extends View {
             resourceManager.addObject(imageGameObject);
 
 
-            AnimationImageGameObject anin = new AnimationImageGameObject();
+             AnimationImageGameObject anin = new AnimationImageGameObject();
 
             anin.loadImage("spritestank.png", context.getAssets(), 1, 8);
             anin.x = RandomXT;
@@ -51,26 +53,54 @@ public class RenderView extends View {
             resourceManager.addObject(anin);
         }
 
-        TextGameObject text= new TextGameObject();
-        text.text="Score:";
-        text.x=100;
-        text.y=100;
-        resourceManager.addObject(text);
+        TextGameObject textp= new TextGameObject();
+        textp.textp="Pontos Positivos:";
+
+        textp.x=50;
+        textp.y=100;
+        resourceManager.addObject(textp);
+
+        TextGameObject textn= new TextGameObject();
+        textn.textn="Pontos Negativos:";
+        textn.x=50;
+        textn.y=150;
+        resourceManager.addObject(textn);
+
     }
+
+
+
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction()==MotionEvent.ACTION_DOWN) {
-            Random rx = new Random();
-            int r1=rx.nextInt(500) + 1; // from 65, to 80
-            imageGameObject.x=(int)event.getX();
-            imageGameObject.y=(int)event.getY();
+    public boolean onTouchEvent(MotionEvent event){
+        int action = event.getAction();
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+
+        switch(action){
+            case MotionEvent.ACTION_DOWN:
+                if(imageGameObject !=null) {
+                    if (imageGameObject.bitmap!= null) {
+                        if (x >= imageGameObject.x && x < (imageGameObject.x + imageGameObject.bitmap.getWidth())
+                                && y >= imageGameObject.y && y < (imageGameObject.y + imageGameObject.bitmap.getHeight())) {
+
+//Cliquei nesta imagem
+                       TextGameObject text= new TextGameObject();
+                            text.textp="GOHORSE";
+                            text.x=350;
+                            text.y=350;
+                            resourceManager.addObject(text);
 
 
+                        }
+                    }
+                }
+
+                break;
         }
         return super.onTouchEvent(event);
-
     }
+
 
 
     @Override

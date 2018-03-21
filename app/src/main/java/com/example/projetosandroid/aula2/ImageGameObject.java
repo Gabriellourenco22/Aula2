@@ -14,10 +14,11 @@ import java.io.InputStream;
  */
 
 public class ImageGameObject extends GameObject {
-    Bitmap bitmap;
+   public Bitmap bitmap;
 
     public void loadImage(String filename, AssetManager manager) {
         try {
+
             InputStream inputStream = manager.open(filename);
             bitmap = BitmapFactory.decodeStream(inputStream);
             inputStream.close();
@@ -26,6 +27,15 @@ public class ImageGameObject extends GameObject {
         }
     }
 
+  public int GetBitmapWidht()
+  {
+return bitmap.getWidth();
+  }
+
+    public int GetBitmapHeight()
+    {
+        return bitmap.getHeight();
+    }
     @Override
     public void draw(Canvas canvas, Paint paint) {
         canvas.drawBitmap(bitmap, x, y, paint);

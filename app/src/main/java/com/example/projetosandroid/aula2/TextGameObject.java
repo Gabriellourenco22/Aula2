@@ -11,12 +11,15 @@ import android.graphics.Paint;
 public class TextGameObject extends GameObject {
     int color= Color.BLACK;
             int size=30;
-    String text="";
+    String textn="";
+    String textp="";
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
         paint.setColor(color);
         paint.setTextSize(size);
-        canvas.drawText(text,x,y,paint);
+        canvas.drawText(textp,x,y,paint);
+
+
     }
 }

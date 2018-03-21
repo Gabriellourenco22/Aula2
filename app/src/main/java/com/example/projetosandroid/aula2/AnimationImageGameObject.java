@@ -14,13 +14,15 @@ import java.io.InputStream;
  */
 
 public class AnimationImageGameObject extends GameObject {
-    Bitmap anin[];
+    public Bitmap anin[];
+
     int totalFrames;
     int currentFrame=0;
 
     public void loadImage(String filename, AssetManager manager, int framesW, int framesH) {
         {
             try {
+
                 InputStream inputStream = manager.open(filename);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 inputStream.close();
@@ -42,9 +44,6 @@ public class AnimationImageGameObject extends GameObject {
             }
         }
 
-
-
-
     }
     float starTime=0;
     @Override
@@ -63,6 +62,7 @@ public class AnimationImageGameObject extends GameObject {
        }
        canvas.drawBitmap(anin[currentFrame],x,y,paint);
     }
+
 }
 
 
