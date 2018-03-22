@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 
 import java.util.Random;
 
@@ -15,63 +14,50 @@ import java.util.Random;
 
 public class RenderView extends View {
 
-    TextGameObject textp;
-    TextGameObject textn;
 
-    Random Posx= new Random();
-    Random PosY= new Random();
+    Random random = new Random();
 
-    Random PosXT = new Random();
-    Random PosYT= new Random();
-
-
-    int RandomX = Posx.nextInt(400-200) + 200;
-    int RandomY = PosY.nextInt(600-200) + 200;
-
-    int RandomXT = PosXT.nextInt(400-200) + 200;
-    int RandomYT = PosYT.nextInt(600-200) + 200;
 
     int score;
     int score2;
 
-
-
     int r=200,g=200,b=200;
+
     ResourceManager resourceManager= ResourceManager.getInstance();
-    ImageGameObject imageGameObject;
+    ImageGameObject go_bob;
+    AnimationImageGameObject go_thank;
+    TextGameObject txt_incressPoint;
+    TextGameObject txt_decressPoint;
+
     Paint paint=new Paint();
     public RenderView(Context context) {
         super(context);
          {
 
 
-            imageGameObject = new ImageGameObject();
-            imageGameObject.loadImage("bob.png", context.getAssets());
-            imageGameObject.x = RandomX;
-            imageGameObject.y = RandomY;
-            resourceManager.addObject(imageGameObject);
+            go_bob = new ImageGameObject();
+            go_bob.loadImage("bob.png", context.getAssets());
+            go_bob.x = random.nextInt(400-200) + 200;
+            go_bob.y =  random.nextInt(400-200) + 200;
+            resourceManager.addObject(go_bob);
 
+            go_thank = new AnimationImageGameObject();
+            go_thank.loadImage("spritestank.png", context.getAssets(), 1, 8);
+            go_thank.x =  random.nextInt(400-200) + 200;
+            go_thank.y =  random.nextInt(400-200) + 200;
+            resourceManager.addObject(go_thank);
 
-             AnimationImageGameObject anin = new AnimationImageGameObject();
+            txt_incressPoint = new TextGameObject();
+            txt_incressPoint.text="Pontos Positivos:";
+             txt_incressPoint.x=50;
+             txt_incressPoint.y=100;
+             resourceManager.addObject(txt_incressPoint);
 
-            anin.loadImage("spritestank.png", context.getAssets(), 1, 8);
-            anin.x = RandomXT;
-            anin.y = RandomYT;
-            resourceManager.addObject(anin);
-
-            textp = new TextGameObject();
-            textn=new TextGameObject();
-             textp.text="Pontos Positivos:";
-
-             textp.x=50;
-             textp.y=100;
-             resourceManager.addObject(textp);
-
-
-             textn.text="Pontos Negativos:";
-             textn.x=50;
-             textn.y=200;
-             resourceManager.addObject(textn);
+             txt_decressPoint =new TextGameObject();
+             txt_decressPoint.text="Pontos Negativos:";
+             txt_decressPoint.x=50;
+             txt_decressPoint.y=200;
+             resourceManager.addObject(txt_decressPoint);
         }
 
 
@@ -90,21 +76,29 @@ public class RenderView extends View {
 
         switch(action){
             case MotionEvent.ACTION_DOWN:
-                if(imageGameObject !=null) {
-                    if (imageGameObject.bitmap!= null) {
-                        if (x >= imageGameObject.x && x < (imageGameObject.x + imageGameObject.bitmap.getWidth())
-                                && y >= imageGameObject.y && y < (imageGameObject.y + imageGameObject.bitmap.getHeight())) {
 
 
-//Cliquei nesta imagem
-
+                boolean isClicked = false;
+                if(go_bob.isCollision(x,y))
+                {
                             score++;
-                            textp.text="Pontos Positivos: "+score;
+                            txt_incressPoint.text="Pontos Positivos: "+score;
+                            isClicked = true;
 
+                }
+                else if(go_thank.isCollision(x,y))
+                {
+                    score2 ++;
+                    txt_decressPoint.text="Pontos Negativos: "+score2;
+                    isClicked = true;
+                }
 
-
-                        }
-                    }
+                if(isClicked)
+                {
+                    go_bob.x =  random.nextInt(400-200) + 200;
+                    go_bob.y =  random.nextInt(400-200) + 200;
+                    go_thank.x = random.nextInt(400-200) + 200;
+                    go_thank.y = random.nextInt(400-200) + 200;
                 }
 
                 break;

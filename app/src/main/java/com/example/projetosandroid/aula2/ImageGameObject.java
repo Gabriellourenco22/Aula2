@@ -40,6 +40,21 @@ return bitmap.getWidth();
     public void draw(Canvas canvas, Paint paint) {
         canvas.drawBitmap(bitmap, x, y, paint);
     }
+
+    @Override
+    public boolean isCollision(float x, float y)
+    {
+
+        boolean result= false;
+
+        if(bitmap !=null) {
+            if (x >= this.x && x < (this.x + this.bitmap.getWidth()) && y >= this.y && y < (this.y + this.bitmap.getHeight())) {
+                result = true;
+            }
+        }
+
+        return result;
+    }
 }
 
 

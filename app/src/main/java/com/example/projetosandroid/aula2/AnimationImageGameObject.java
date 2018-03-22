@@ -15,7 +15,13 @@ import java.io.InputStream;
 
 public class AnimationImageGameObject extends GameObject {
     public Bitmap anin[];
-    public Bitmap bitmap;
+
+
+    public Bitmap getbBtmap()
+    {
+        return anin[currentFrame];
+    }
+
     int totalFrames;
     int currentFrame=0;
 
@@ -62,6 +68,22 @@ public class AnimationImageGameObject extends GameObject {
        }
        }
        canvas.drawBitmap(anin[currentFrame],x,y,paint);
+    }
+
+    @Override
+    public boolean isCollision(float x, float y)
+    {
+
+        boolean result= false;
+        Bitmap bitmap = getbBtmap();
+
+        if(bitmap !=null) {
+            if (x >= this.x && x < (this.x + bitmap.getWidth()) && y >= this.y && y < (this.y + bitmap.getHeight())) {
+                result = true;
+            }
+        }
+
+        return result;
     }
 
 }

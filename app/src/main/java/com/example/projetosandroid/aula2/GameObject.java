@@ -8,11 +8,15 @@ import android.graphics.Paint;
  */
 
 public abstract class GameObject {
-    public int x=0, y=0;
+    public float x=0, y=0;
     public int layer=0;
     String textt= "";
 
 
+    public boolean isCollision(float x, float y)
+    {
+        return false;
+    }
     public void draw(Canvas canvas, Paint paint){
 
     }
