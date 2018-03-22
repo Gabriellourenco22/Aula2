@@ -15,7 +15,7 @@ import java.io.InputStream;
 
 public class AnimationImageGameObject extends GameObject {
     public Bitmap anin[];
-
+    public Bitmap bitmap;
     int totalFrames;
     int currentFrame=0;
 
@@ -43,6 +43,7 @@ public class AnimationImageGameObject extends GameObject {
                 e.printStackTrace();
             }
         }
+
 
     }
     float starTime=0;

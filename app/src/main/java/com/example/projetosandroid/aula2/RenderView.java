@@ -38,6 +38,7 @@ public class RenderView extends View {
     public RenderView(Context context) {
         super(context);
          {
+
             imageGameObject = new ImageGameObject();
             imageGameObject.loadImage("bob.png", context.getAssets());
             imageGameObject.x = RandomX;
@@ -54,7 +55,7 @@ public class RenderView extends View {
         }
 
         TextGameObject textp= new TextGameObject();
-        textp.textp="Pontos Positivos:";
+        textp.textp="Pontos Positivos:"+score;
 
         textp.x=50;
         textp.y=100;
@@ -84,16 +85,25 @@ public class RenderView extends View {
                         if (x >= imageGameObject.x && x < (imageGameObject.x + imageGameObject.bitmap.getWidth())
                                 && y >= imageGameObject.y && y < (imageGameObject.y + imageGameObject.bitmap.getHeight())) {
 
+                            TextGameObject textp= new TextGameObject();
+                            textp.textp="Pontos Positivos:"+score;
+
+                            textp.x=50;
+                            textp.y=100;
+                            resourceManager.addObject(textp);
 //Cliquei nesta imagem
-                       TextGameObject text= new TextGameObject();
-                            text.textp="GOHORSE";
-                            text.x=350;
-                            text.y=350;
-                            resourceManager.addObject(text);
+                            score++;
+
 
 
                         }
                     }
+                    TextGameObject textp= new TextGameObject();
+                    textp.textp="Pontos Positivos:"+score;
+
+                    textp.x=50;
+                    textp.y=100;
+                    resourceManager.addObject(textp);
                 }
 
                 break;
@@ -112,4 +122,5 @@ public class RenderView extends View {
     }
     invalidate();
 }
+
 }

@@ -1,5 +1,8 @@
 package com.example.projetosandroid.aula2;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,5 +30,15 @@ class ResourceManager {
             }
         }
         gameObjects.add(obj);
+    }
+    public void removeObject(GameObject obj)
+    {
+        gameObjects.remove(obj);
+    }
+    public void updateAmdDraw(float deltaTime, Canvas canvas, Paint paint){
+        for(GameObject obj: gameObjects){
+            obj.update(deltaTime);
+            obj.draw(canvas,paint);
+        }
     }
 }

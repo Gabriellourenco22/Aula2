@@ -10,9 +10,15 @@ import android.graphics.Paint;
 public abstract class GameObject {
     public int x=0, y=0;
     public int layer=0;
+    String textt= "";
 
 
     public void draw(Canvas canvas, Paint paint){
+
+    }
+
+    public void update(float deltaTime){
+
 
     }
 }

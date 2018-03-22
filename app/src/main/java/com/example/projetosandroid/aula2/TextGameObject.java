@@ -19,6 +19,9 @@ public class TextGameObject extends GameObject {
         paint.setColor(color);
         paint.setTextSize(size);
         canvas.drawText(textp,x,y,paint);
+    }
+    void UpadtScore()
+    {
 
 
     }
