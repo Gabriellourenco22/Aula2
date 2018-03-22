@@ -14,6 +14,10 @@ import java.util.Random;
  */
 
 public class RenderView extends View {
+
+    TextGameObject textp;
+    TextGameObject textn;
+
     Random Posx= new Random();
     Random PosY= new Random();
 
@@ -28,6 +32,7 @@ public class RenderView extends View {
     int RandomYT = PosYT.nextInt(600-200) + 200;
 
     int score;
+    int score2;
 
 
 
@@ -38,6 +43,7 @@ public class RenderView extends View {
     public RenderView(Context context) {
         super(context);
          {
+
 
             imageGameObject = new ImageGameObject();
             imageGameObject.loadImage("bob.png", context.getAssets());
@@ -52,20 +58,24 @@ public class RenderView extends View {
             anin.x = RandomXT;
             anin.y = RandomYT;
             resourceManager.addObject(anin);
+
+            textp = new TextGameObject();
+            textn=new TextGameObject();
+             textp.text="Pontos Positivos:";
+
+             textp.x=50;
+             textp.y=100;
+             resourceManager.addObject(textp);
+
+
+             textn.text="Pontos Negativos:";
+             textn.x=50;
+             textn.y=200;
+             resourceManager.addObject(textn);
         }
 
-        TextGameObject textp= new TextGameObject();
-        textp.textp="Pontos Positivos:"+score;
 
-        textp.x=50;
-        textp.y=100;
-        resourceManager.addObject(textp);
 
-        TextGameObject textn= new TextGameObject();
-        textn.textn="Pontos Negativos:";
-        textn.x=50;
-        textn.y=150;
-        resourceManager.addObject(textn);
 
     }
 
@@ -85,25 +95,16 @@ public class RenderView extends View {
                         if (x >= imageGameObject.x && x < (imageGameObject.x + imageGameObject.bitmap.getWidth())
                                 && y >= imageGameObject.y && y < (imageGameObject.y + imageGameObject.bitmap.getHeight())) {
 
-                            TextGameObject textp= new TextGameObject();
-                            textp.textp="Pontos Positivos:"+score;
 
-                            textp.x=50;
-                            textp.y=100;
-                            resourceManager.addObject(textp);
 //Cliquei nesta imagem
+
                             score++;
+                            textp.text="Pontos Positivos: "+score;
 
 
 
                         }
                     }
-                    TextGameObject textp= new TextGameObject();
-                    textp.textp="Pontos Positivos:"+score;
-
-                    textp.x=50;
-                    textp.y=100;
-                    resourceManager.addObject(textp);
                 }
 
                 break;
